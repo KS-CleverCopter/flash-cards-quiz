@@ -1,6 +1,5 @@
 import { Box, Flex, Heading, IconButton } from '@chakra-ui/react';
 import React from 'react';
-import { BsTrash } from 'react-icons/bs';
 import { RiDeleteBin6Line } from 'react-icons/ri';
 import { useMedia } from 'react-use';
 import { FlashCardsAtom } from './flashcards.store';
@@ -27,12 +26,6 @@ export const CardComponent: React.FC<CardComponentProps> = ({
         return newFlashCards;
       });
     }
-
-    setFlashCardsAtom(prev => {
-      const newFlashCards = { ...prev };
-      delete newFlashCards[id];
-      return newFlashCards;
-    });
   };
 
   return (

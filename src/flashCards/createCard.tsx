@@ -29,9 +29,8 @@ export const CreateCardComponent: React.FC = () => {
     }
   };
   const handleSave = () => {
-    const keys = Object.keys(getFlashCardsAtom);
-    const lastKey = Number(keys[keys.length - 1]);
-    const nextKey = lastKey + 1;
+    const nextKey = Date.now().toString();
+    console.log(nextKey);
     setFlashCardsAtom(prev => ({ ...prev, [nextKey]: { title, content } }));
     toaster.create({
       title: 'Success',
