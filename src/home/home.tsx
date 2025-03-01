@@ -4,30 +4,33 @@ import Sidebar from './sideBar';
 import { useMedia } from 'react-use';
 import Heading from './heading';
 
-const Home: React.FC = () => {
+export const Home = ({ children }: { children: React.ReactNode }) => {
   const isMobile = useMedia('(max-width: 830px)');
   return (
     <Box
       display="grid"
-      gridTemplateColumns={['1fr', '1fr', 'minmax(230px, 1fr) repeat(1, 6fr)']}
-      gridTemplateRows="2"
+      gridTemplateColumns={
+        isMobile ? '1fr' : 'minmax(230px, 1fr) repeat(1, 6fr)'
+      }
+      gridTemplateRows={isMobile ? '1fr' : '100px auto'}
       w="100%"
-      height="100%"
+      h="100%"
     >
       {!isMobile && <Heading />}
       <Box
         p="4"
         borderRight={isMobile ? 'none' : '1px solid'}
         borderColor={'gray.200'}
+        height="100%"
       >
         <Sidebar />
       </Box>
       <Box
         p="4"
         gridColumn={isMobile ? 'span 2' : 'default'}
-        pt={[12, 12, 12, 4]}
+        pt={isMobile ? '0' : '4'}
       >
-        Content
+        {children}
       </Box>
     </Box>
   );

@@ -1,61 +1,69 @@
 import {
   Box,
   Button,
-  DrawerHeader,
   DrawerBody,
   DrawerContent,
-  VStack,
   DrawerRoot,
   DrawerBackdrop,
   DrawerTrigger,
-  DrawerCloseTrigger,
-  DrawerTitle,
-  DrawerFooter,
-  DrawerActionTrigger,
-  useBreakpointValue,
   IconButton,
 } from '@chakra-ui/react';
 import { useState } from 'react';
 import { CiMenuBurger } from 'react-icons/ci';
+import { useNavigate } from 'react-router-dom';
 import { useMedia } from 'react-use';
+import { PageRoutes } from '../common';
+import Heading from './heading';
 
-interface Props {
-  onClose: () => void;
-  isOpen: boolean;
-  variant: 'drawer' | 'sidebar';
-}
+const SidebarContent = ({
+  setOpen,
+}: {
+  setOpen?: React.Dispatch<React.SetStateAction<boolean>>;
+}) => {
+  const navigate = useNavigate();
 
-const SidebarContent = () => (
-  <Box>
-    <Button
-      w="100%"
-      variant="ghost"
-      size="sm"
-      colorPalette={'blue'}
-      justifyContent="start"
-    >
-      Home
-    </Button>
-    <Button
-      w="100%"
-      variant="ghost"
-      size="sm"
-      colorPalette={'blue'}
-      justifyContent="start"
-    >
-      FlashCards
-    </Button>
-    <Button
-      w="100%"
-      variant="ghost"
-      size="sm"
-      colorPalette={'blue'}
-      justifyContent="start"
-    >
-      PracticeTests
-    </Button>
-  </Box>
-);
+  const handleClick = (route: string) => {
+    if (setOpen) {
+      setOpen(false);
+    }
+    navigate(route);
+  };
+
+  return (
+    <Box>
+      <Button
+        w="100%"
+        variant="ghost"
+        size="sm"
+        colorPalette={'blue'}
+        justifyContent="start"
+        onClick={() => handleClick(PageRoutes.Home)}
+      >
+        Home
+      </Button>
+      <Button
+        w="100%"
+        variant="ghost"
+        size="sm"
+        colorPalette={'blue'}
+        justifyContent="start"
+        onClick={() => handleClick(PageRoutes.FlashCards)}
+      >
+        FlashCards
+      </Button>
+      <Button
+        w="100%"
+        variant="ghost"
+        size="sm"
+        colorPalette={'blue'}
+        justifyContent="start"
+        onClick={() => handleClick(PageRoutes.PracticeTests)}
+      >
+        PracticeTests
+      </Button>
+    </Box>
+  );
+};
 
 const Sidebar = () => {
   const isMobile = useMedia('(max-width: 830px)');
@@ -65,25 +73,28 @@ const Sidebar = () => {
     <Box>
       {!isMobile && <SidebarContent />}
       {isMobile && (
-        <Box pos="fixed">
-          <DrawerRoot
-            open={open}
-            onOpenChange={e => setOpen(e.open)}
-            placement="start"
-          >
-            <DrawerBackdrop />
-            <DrawerTrigger>
-              <IconButton aria-label="Burger Menu" variant="subtle">
-                <CiMenuBurger />
-              </IconButton>
-            </DrawerTrigger>
-            <DrawerContent offset={'0'}>
-              <DrawerBody asChild>
-                <SidebarContent />
-              </DrawerBody>
-            </DrawerContent>
-          </DrawerRoot>
-        </Box>
+        <>
+          <Heading />
+          <Box pos="fixed" top="16px" left="16px">
+            <DrawerRoot
+              open={open}
+              onOpenChange={e => setOpen(e.open)}
+              placement="start"
+            >
+              <DrawerBackdrop />
+              <DrawerTrigger>
+                <IconButton aria-label="Burger Menu" variant="subtle">
+                  <CiMenuBurger />
+                </IconButton>
+              </DrawerTrigger>
+              <DrawerContent offset={'0'}>
+                <DrawerBody asChild>
+                  <SidebarContent setOpen={setOpen} />
+                </DrawerBody>
+              </DrawerContent>
+            </DrawerRoot>
+          </Box>
+        </>
       )}
     </Box>
   );
