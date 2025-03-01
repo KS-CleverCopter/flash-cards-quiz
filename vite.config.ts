@@ -1,22 +1,8 @@
-/// <reference types="vitest" />
-import { resolve } from "path"
-import { defineConfig } from "vite"
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+import tsconfigPaths from "vite-tsconfig-paths"
 
+// https://vite.dev/config/
 export default defineConfig({
-  resolve: {
-    alias: {
-      "@chakra-ui/react": resolve("packages/react/src"),
-      compositions: resolve("apps/compositions/src"),
-    },
-  },
-  test: {
-    globals: true,
-    watch: false,
-    environment: "jsdom",
-    include: ["**/*test.{ts,tsx}"],
-    setupFiles: ["vitest.setup.ts"],
-    coverage: {
-      include: ["packages"],
-    },
-  },
+  plugins: [react(), tsconfigPaths()],
 })

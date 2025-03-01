@@ -1,9 +1,16 @@
 {
-  "extends": ["./tsconfig.build.json"],
-  "include": ["vitest.setup.ts", "packages", "apps/compositions"],
+  "files": [],
+  "references": [
+    { "path": "./tsconfig.app.json" },
+    { "path": "./tsconfig.node.json" }
+  ],
   "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "skipLibCheck": true,
     "paths": {
-      "compositions/*": ["./apps/compositions/src/*"]
+      "@/*": ["./src/*"]
     }
   }
 }
