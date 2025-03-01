@@ -7,9 +7,8 @@ import {
   Text,
   Textarea,
 } from '@chakra-ui/react';
-import React, { ChangeEventHandler, useCallback, useEffect } from 'react';
+import React, { ChangeEventHandler, useEffect } from 'react';
 import { useMedia } from 'react-use';
-import { Toaster, toaster } from '../components/ui/toaster';
 import { MdCheckCircleOutline } from 'react-icons/md';
 
 interface PracticeTestsProps {

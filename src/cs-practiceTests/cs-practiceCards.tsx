@@ -59,7 +59,12 @@ export const CSPracticeCards = () => {
         {flashCardKeys.map(key => (
           <Box key={key}>
             {answers[key] === true && (
-              <IconButton bg="green">
+              <IconButton
+                bg="green"
+                size="xs"
+                minW={isMobile ? '10px' : 'auto'}
+                h={isMobile ? '20px' : 'auto'}
+              >
                 <MdCheckCircleOutline />
               </IconButton>
             )}
