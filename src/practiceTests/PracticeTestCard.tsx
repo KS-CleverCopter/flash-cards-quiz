@@ -39,14 +39,23 @@ export const PracticeTestCard: React.FC<PracticeTestsProps> = ({
   const handleClear = () => {
     setAnswer('');
   };
-  const handleSubmit = useCallback(() => {
-    if (answer === content) {
+  const compareText = (textOne: string, textTwo: string): number => {
+    const text1 = textOne.toLocaleLowerCase();
+    const text2 = textTwo.toLocaleLowerCase();
+    const longerText = text1.length > text2.length ? text1 : text2;
+    const shorterText = text1.length > text2.length ? text2 : text1;
+    let matches = 0;
+    for (let i = 0; i < longerText.length; i++) {
+      if (longerText[i] === shorterText[i % shorterText.length]) {
+        matches++;
+      }
+    }
+    return (matches / longerText.length) * 100;
+  };
+  const handleSubmit = () => {
+    const match = compareText(answer, content);
+    if (match > 90) {
       setCorrectAnswer(true);
-      toaster.create({
-        title: 'Correct',
-        description: 'That is the correct Answer !',
-      });
-      console.log({ id });
       onSubmitCallback(id, true);
       return;
     }
@@ -54,7 +63,7 @@ export const PracticeTestCard: React.FC<PracticeTestsProps> = ({
       setCorrectAnswer(false);
       onSubmitCallback(id, false);
     }
-  }, [answer, content]);
+  };
   const getBgColor = () => {
     if (correctAnswer !== null && correctAnswer) {
       return 'green.700';
@@ -179,7 +188,7 @@ export const PracticeTestCard: React.FC<PracticeTestsProps> = ({
           </Flex>
         </Box>
       </Box>
-      <Toaster />
+      {/* <Toaster /> */}
     </>
   );
 };

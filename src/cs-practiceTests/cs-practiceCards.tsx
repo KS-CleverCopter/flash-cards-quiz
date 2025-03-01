@@ -1,21 +1,19 @@
 import { Box, Heading, HStack, IconButton, Progress } from '@chakra-ui/react';
-import { useAtom } from 'jotai';
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { useMedia } from 'react-use';
 import { useState } from 'react';
-import { PracticeTestCard } from './PracticeTestCard';
-import { FlashCardsAtom } from '../flashCards/flashcards.store';
+import { defaultCSQuestions } from '../flashCards/flashcards.store';
 import { MdCheckCircleOutline } from 'react-icons/md';
 import { VscError } from 'react-icons/vsc';
+import { PracticeTestCard } from '../practiceTests/PracticeTestCard';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
-export const PracticeCards = () => {
-  const [getFlashCardsAtom] = useAtom(FlashCardsAtom);
+export const CSPracticeCards = () => {
+  const getFlashCardsAtom = defaultCSQuestions;
   const flashCardKeys = Object.keys(getFlashCardsAtom);
-  console.log(flashCardKeys);
   const isMobile = useMedia('(max-width: 830px)');
   const [percentage, setPercentage] = useState(0);
   const handleSlideChange = (activeIndex: number) => {
@@ -61,12 +59,7 @@ export const PracticeCards = () => {
         {flashCardKeys.map(key => (
           <Box key={key}>
             {answers[key] === true && (
-              <IconButton
-                bg="green"
-                size="xs"
-                minW={isMobile ? '10px' : 'auto'}
-                h={isMobile ? '20px' : 'auto'}
-              >
+              <IconButton bg="green">
                 <MdCheckCircleOutline />
               </IconButton>
             )}

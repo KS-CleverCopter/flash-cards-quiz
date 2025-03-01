@@ -7,6 +7,7 @@ import {
   DrawerBackdrop,
   DrawerTrigger,
   IconButton,
+  Separator,
 } from '@chakra-ui/react';
 import { useState } from 'react';
 import { CiMenuBurger } from 'react-icons/ci';
@@ -59,7 +60,28 @@ const SidebarContent = ({
         justifyContent="start"
         onClick={() => handleClick(PageRoutes.PracticeTests)}
       >
-        PracticeTests
+        Your PracticeTests
+      </Button>
+      <Separator py="1" mt="2" />
+      <Button
+        onClick={() => handleClick(PageRoutes.CSFlashCards)}
+        w="100%"
+        variant="ghost"
+        size="sm"
+        colorPalette={'blue'}
+        justifyContent="start"
+      >
+        CS FlashCards
+      </Button>
+      <Button
+        onClick={() => handleClick(PageRoutes.CSPracticeQuestions)}
+        w="100%"
+        variant="ghost"
+        size="sm"
+        colorPalette={'blue'}
+        justifyContent="start"
+      >
+        CS Practice Questions
       </Button>
     </Box>
   );

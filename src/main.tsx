@@ -7,6 +7,8 @@ import { FlashCards } from './flashCards/FlashCards.tsx';
 import Home from './home/home.tsx';
 import { Dashboard } from './dashboard/Dashboard.tsx';
 import { PracticeCards } from './practiceTests/PracticeCards.tsx';
+import { CSPracticeCards } from './cs-practiceTests/cs-practiceCards.tsx';
+import { CSFlashCards } from './cs-flashCards/cs-flashCards.tsx';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -20,6 +22,11 @@ createRoot(document.getElementById('root')!).render(
               path={PageRoutes.PracticeTests}
               element={<PracticeCards />}
             />
+            <Route
+              path={PageRoutes.CSPracticeQuestions}
+              element={<CSPracticeCards />}
+            />
+            <Route path={PageRoutes.CSFlashCards} element={<CSFlashCards />} />
           </Routes>
         </Home>
       </BrowserRouter>
